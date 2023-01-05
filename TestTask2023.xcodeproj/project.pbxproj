@@ -17,6 +17,10 @@
 		8B064D4A296706B800939549 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B064D49296706B800939549 /* SwiftUIView.swift */; };
 		8B064D4C296706C600939549 /* SwiftUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B064D4B296706C600939549 /* SwiftUIViewModel.swift */; };
 		8B064D4F2967221B00939549 /* ImageLoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B064D4E2967221B00939549 /* ImageLoadService.swift */; };
+		8B064D5229673B8500939549 /* LeftLabelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B064D5129673B8500939549 /* LeftLabelsView.swift */; };
+		8B064D5429673CA400939549 /* RotatedTextWithColorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B064D5329673CA400939549 /* RotatedTextWithColorBackground.swift */; };
+		8B064D5829675A1500939549 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B064D5729675A1500939549 /* Colors.xcassets */; };
+		8B064D5B29675B6B00939549 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B064D5A29675B6B00939549 /* AppColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		8B064D49296706B800939549 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		8B064D4B296706C600939549 /* SwiftUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModel.swift; sourceTree = "<group>"; };
 		8B064D4E2967221B00939549 /* ImageLoadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadService.swift; sourceTree = "<group>"; };
+		8B064D5129673B8500939549 /* LeftLabelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftLabelsView.swift; sourceTree = "<group>"; };
+		8B064D5329673CA400939549 /* RotatedTextWithColorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatedTextWithColorBackground.swift; sourceTree = "<group>"; };
+		8B064D5729675A1500939549 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		8B064D5A29675B6B00939549 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 		8B064D262966F80A00939549 /* TestTask2023 */ = {
 			isa = PBXGroup;
 			children = (
+				8B064D5929675B5600939549 /* Kit */,
 				8B064D4D2967220A00939549 /* Services */,
 				8B064D422966FF3D00939549 /* Modules */,
 				8B064D272966F80A00939549 /* AppDelegate.swift */,
@@ -72,6 +81,7 @@
 				8B064D302966F80B00939549 /* Assets.xcassets */,
 				8B064D322966F80B00939549 /* LaunchScreen.storyboard */,
 				8B064D352966F80B00939549 /* Info.plist */,
+				8B064D5729675A1500939549 /* Colors.xcassets */,
 			);
 			path = TestTask2023;
 			sourceTree = "<group>";
@@ -97,6 +107,7 @@
 		8B064D48296706A700939549 /* SwiftUIView */ = {
 			isa = PBXGroup;
 			children = (
+				8B064D5029673B6000939549 /* Subviews */,
 				8B064D49296706B800939549 /* SwiftUIView.swift */,
 				8B064D4B296706C600939549 /* SwiftUIViewModel.swift */,
 			);
@@ -109,6 +120,23 @@
 				8B064D4E2967221B00939549 /* ImageLoadService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8B064D5029673B6000939549 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				8B064D5129673B8500939549 /* LeftLabelsView.swift */,
+				8B064D5329673CA400939549 /* RotatedTextWithColorBackground.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		8B064D5929675B5600939549 /* Kit */ = {
+			isa = PBXGroup;
+			children = (
+				8B064D5A29675B6B00939549 /* AppColor.swift */,
+			);
+			path = Kit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B064D342966F80B00939549 /* LaunchScreen.storyboard in Resources */,
+				8B064D5829675A1500939549 /* Colors.xcassets in Resources */,
 				8B064D312966F80B00939549 /* Assets.xcassets in Resources */,
 				8B064D2F2966F80A00939549 /* Main.storyboard in Resources */,
 			);
@@ -182,13 +211,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B064D5229673B8500939549 /* LeftLabelsView.swift in Sources */,
 				8B064D3F2966F8AB00939549 /* UIKitViewModel.swift in Sources */,
+				8B064D5429673CA400939549 /* RotatedTextWithColorBackground.swift in Sources */,
 				8B064D4A296706B800939549 /* SwiftUIView.swift in Sources */,
 				8B064D3D2966F89700939549 /* UIKitViewController.swift in Sources */,
 				8B064D4F2967221B00939549 /* ImageLoadService.swift in Sources */,
 				8B064D4C296706C600939549 /* SwiftUIViewModel.swift in Sources */,
 				8B064D282966F80A00939549 /* AppDelegate.swift in Sources */,
 				8B064D2A2966F80A00939549 /* SceneDelegate.swift in Sources */,
+				8B064D5B29675B6B00939549 /* AppColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

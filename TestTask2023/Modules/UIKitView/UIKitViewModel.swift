@@ -11,17 +11,27 @@ import UIKit
 
 protocol UIKitViewModel {
     var graphImage: AnyPublisher<UIImage?, Never> { get }
+    var numberForSwiftUIView: AnyPublisher<Int, Never> { get }
     
     func loadFirstGraph()
     
     func increase()
     func reduce()
+    func setNumber(number: Int)
+    
+    func openSwiftUIViewAction()
 }
 
 class UIKitViewModelImpl {
     private let imageLoader: ImageLoadService
     private var _graphImage = PassthroughSubject<UIImage?, Never>()
-    private var currentNumber = 0
+    private var _numberForSwiftUIView = PassthroughSubject<Int, Never>()
+    
+    private var currentNumber = 0 {
+        didSet {
+            loadGraph()
+        }
+    }
     
     init(imageLoader: ImageLoadService) {
         self.imageLoader = imageLoader
@@ -38,6 +48,10 @@ extension UIKitViewModelImpl: UIKitViewModel {
         _graphImage.eraseToAnyPublisher()
     }
     
+    var numberForSwiftUIView: AnyPublisher<Int, Never> {
+        _numberForSwiftUIView.eraseToAnyPublisher()
+    }
+    
     func loadFirstGraph() {
         loadGraph()
     }
@@ -45,15 +59,21 @@ extension UIKitViewModelImpl: UIKitViewModel {
     func increase() {
         if currentNumber < 180 {
             currentNumber += 1
-            loadGraph()
         }
     }
     
     func reduce() {
         if currentNumber > 1 {
             currentNumber -= 1
-            loadGraph()
         }
+    }
+    
+    func setNumber(number: Int) {
+        currentNumber = number
+    }
+    
+    func openSwiftUIViewAction() {
+        _numberForSwiftUIView.send(currentNumber)
     }
 }
 

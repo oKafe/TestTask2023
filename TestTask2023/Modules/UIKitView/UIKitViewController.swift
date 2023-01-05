@@ -16,6 +16,7 @@ class UIKitViewController: UIViewController {
     @IBOutlet private weak var graphImageView: UIImageView!
     @IBOutlet private var labelsForRotationCollection: [UILabel]!
     
+    private var tapOnGraphRecognizer: UITapGestureRecognizer!
     private var bag: [AnyCancellable] = []
     
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ private extension UIKitViewController {
     func setup() {
         setupNavigation()
         rotateLabels()
+        setupTapRecognizer()
         bindViewModel()
     }
     
@@ -44,17 +46,29 @@ private extension UIKitViewController {
         }
     }
     
+    func setupTapRecognizer() {
+        tapOnGraphRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnGraphAction))
+        graphImageView.addGestureRecognizer(tapOnGraphRecognizer)
+        graphImageView.isUserInteractionEnabled = true
+    }
+    
     func bindViewModel() {
         viewModel?.graphImage
             .assign(to: \.image, on: graphImageView)
+            .store(in: &bag)
+        
+        viewModel?.numberForSwiftUIView
+            .sink(receiveValue: { [weak self] number in
+                self?.openSwiftUIView(number: number)
+            })
             .store(in: &bag)
     }
 }
 
 //MARK: - Actions
 extension UIKitViewController {
-    @IBAction func tapOnGraphAction(_ sender: Any) {
-        openSwiftUIView()
+    @objc func tapOnGraphAction() {
+        viewModel?.openSwiftUIViewAction()
     }
     
     @IBAction func reduceAction(_ sender: Any) {
@@ -68,7 +82,18 @@ extension UIKitViewController {
 
 //MARK: - Navigate to SwiftUI View
 private extension UIKitViewController {
-    func openSwiftUIView() {
+    func openSwiftUIView(number: Int) {
+        let viewModel = SwiftUIViewModelImpl(number: number)
+        viewModel.numberForPreviousScreen
+            .sink { [weak self] number in
+                self?.viewModel?.setNumber(number: number)
+            }
+            .store(in: &bag)
+            
         
+        let view = SwiftUIView(viewModel: viewModel)
+        let hostingViewController = UIHostingController(rootView: view)
+        
+        navigationController?.pushViewController(hostingViewController, animated: true)
     }
 }
