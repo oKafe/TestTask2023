@@ -65,14 +65,14 @@ struct SwiftUIView<T>: View where T: SwiftUIViewModel {
                     Button("-") {
                         viewModel.reduce()
                     }
-                    .frame(width: 30, height: 35)
+                    .frame(width: 35, height: 35)
                     .foregroundColor(.white)
                     .background(Color.blue.cornerRadius(4))
                     
                     Button("+") {
                         viewModel.increase()
                     }
-                    .frame(width: 30, height: 35)
+                    .frame(width: 35, height: 35)
                     .foregroundColor(.white)
                     .background(Color.blue.cornerRadius(4))
                     
