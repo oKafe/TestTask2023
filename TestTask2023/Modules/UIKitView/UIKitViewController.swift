@@ -10,7 +10,6 @@ import SwiftUI
 import Combine
 
 class UIKitViewController: UIViewController {
-
     var viewModel: UIKitViewModel?
     
     @IBOutlet private weak var graphImageView: UIImageView!
@@ -82,16 +81,22 @@ extension UIKitViewController {
 
 //MARK: - Navigate to SwiftUI View
 private extension UIKitViewController {
+    /*
+     1. Тут гарно було б переходи зробити координатором чи рутером,
+     але я порахував, що для одного переходу це ту мач
+     2. На SwiftUI вюшці вирішив підгрузку картинки зробити з AsyncImage, бо не хотілось однакові моделі робити, хоча можна було заінжектити ImageLoader який вже є, тоді і кеш був би спільний
+     */
     func openSwiftUIView(number: Int) {
-        let viewModel = SwiftUIViewModelImpl(number: number)
-        viewModel.numberForPreviousScreen
+        let swiftUIViewModel = SwiftUIViewModelImpl(number: number)
+        
+        swiftUIViewModel.numberForPreviousScreen
             .sink { [weak self] number in
                 self?.viewModel?.setNumber(number: number)
             }
             .store(in: &bag)
             
         
-        let view = SwiftUIView(viewModel: viewModel)
+        let view = SwiftUIView(viewModel: swiftUIViewModel)
         let hostingViewController = UIHostingController(rootView: view)
         
         navigationController?.pushViewController(hostingViewController, animated: true)

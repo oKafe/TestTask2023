@@ -23,7 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let uiKitViewController = storyboard.instantiateViewController(withIdentifier: "UIKitViewController") as? UIKitViewController else { return }
         
-        let imageLoader = ImageLoadServiceImpl()
+        var imageLoader = ImageLoadServiceImpl()
+        imageLoader.cacheImageCountLimit = 20
+        
         let uiKitViewModel = UIKitViewModelImpl(imageLoader: imageLoader)
         uiKitViewController.viewModel = uiKitViewModel
         

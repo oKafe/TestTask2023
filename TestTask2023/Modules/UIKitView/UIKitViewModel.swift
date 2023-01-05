@@ -36,10 +36,6 @@ class UIKitViewModelImpl {
     init(imageLoader: ImageLoadService) {
         self.imageLoader = imageLoader
     }
-    
-    deinit {
-        print("UUPS")
-    }
 }
 
 //MARK: - UIKitViewModel
@@ -63,7 +59,7 @@ extension UIKitViewModelImpl: UIKitViewModel {
     }
     
     func reduce() {
-        if currentNumber > 1 {
+        if currentNumber > 0 {
             currentNumber -= 1
         }
     }

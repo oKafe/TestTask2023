@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-@MainActor protocol SwiftUIViewModel: ObservableObject {
+protocol SwiftUIViewModel: ObservableObject {
     var graphImageUrlString: String { get }
     var numberForPreviousScreen: AnyPublisher<Int, Never> { get }
     
@@ -28,13 +28,9 @@ class SwiftUIViewModelImpl {
         self.currentNumber = number
         self._graphImageUrlString =  urlString
     }
-    
-    deinit {
-        print("lol")
-    }
 }
 
-
+//MARK: - SwiftUIViewModel
 extension SwiftUIViewModelImpl: SwiftUIViewModel {
     var graphImageUrlString: String {
         _graphImageUrlString
@@ -45,7 +41,7 @@ extension SwiftUIViewModelImpl: SwiftUIViewModel {
     }
     
     func reduce() {
-        if currentNumber > 1 {
+        if currentNumber > 0 {
             currentNumber -= 1
             _graphImageUrlString =  urlString
         }
@@ -64,6 +60,7 @@ extension SwiftUIViewModelImpl: SwiftUIViewModel {
     }
 }
 
+//MARK: - Graph Image Url String
 private extension SwiftUIViewModelImpl {
     var urlString: String {
         return "https://job-server.net/images/padacura/score/\(currentNumber).png"

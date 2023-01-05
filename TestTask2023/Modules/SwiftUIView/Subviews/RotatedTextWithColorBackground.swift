@@ -10,14 +10,14 @@ import SwiftUI
 struct RotatedTextWithColorBackground: View {
     
     var color: Color
+    var text: String
     
     var body: some View {
         GeometryReader { geometryProxy in
             ZStack {
                 color
-                Text("Hello Word")
-                    .font(.system(size: 7))
-                    .frame(width: geometryProxy.size.width)
+                Text(text)
+                    .font(.system(size: 6))
                     .rotationEffect(Angle(degrees: -90))
             }
         }
@@ -26,6 +26,6 @@ struct RotatedTextWithColorBackground: View {
 
 struct RotatedTextWithColorBackground_Previews: PreviewProvider {
     static var previews: some View {
-        RotatedTextWithColorBackground(color: .blue)
+        RotatedTextWithColorBackground(color: .blue, text: "Hello World")
     }
 }

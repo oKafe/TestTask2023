@@ -9,12 +9,15 @@ import Foundation
 import UIKit
 
 protocol ImageLoadService {
+    var cacheImageCountLimit: Int { get set }
+    
     func loadImage(urlString: String, completion: @escaping ((UIImage?, Error?) -> Void))
 }
 
-struct ImageLoadServiceImpl {
+class ImageLoadServiceImpl {
     
     private var cache = NSCache<NSString, UIImage>()
+    private var task: URLSessionDataTask?
     
     private func loadImageFromUrlString(_ urlString: String, completion: @escaping ((UIImage?, Error?) -> Void)) {
         guard let url = URL(string: urlString) else {
@@ -22,12 +25,15 @@ struct ImageLoadServiceImpl {
             return
         }
         
+        task?.cancel()
+        
         let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        
+        task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             DispatchQueue.main.async {
                 if let data = data,
                    let uiImage = UIImage(data: data) {
-                    self.cache.setObject(uiImage, forKey: urlString as NSString)
+                    self?.cache.setObject(uiImage, forKey: urlString as NSString)
                     completion(uiImage, nil)
                 } else {
                     completion(nil, error)
@@ -35,7 +41,7 @@ struct ImageLoadServiceImpl {
             }
         }
         
-        task.resume()
+        task?.resume()
     }
 }
 
