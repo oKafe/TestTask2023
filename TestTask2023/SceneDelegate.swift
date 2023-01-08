@@ -15,19 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let uiKitViewController = storyboard.instantiateViewController(withIdentifier: "UIKitViewController") as? UIKitViewController else { return }
         
-        var imageLoader = ImageLoadServiceImpl()
-        imageLoader.cacheImageCountLimit = 20
-        
-        let uiKitViewModel = UIKitViewModelImpl(imageLoader: imageLoader)
-        uiKitViewController.viewModel = uiKitViewModel
-        
-        let navigationController = UINavigationController(rootViewController: uiKitViewController)
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = navigationController
+        window?.rootViewController = rootNavigationController
         window?.makeKeyAndVisible()
     }
 
@@ -62,3 +53,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+private extension SceneDelegate {
+    var rootNavigationController: UINavigationController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let uiKitViewController = storyboard.instantiateViewController(withIdentifier: "UIKitViewController") as? UIKitViewController else { return UINavigationController() }
+        
+        var imageLoader = ImageLoadServiceImpl()
+        imageLoader.cacheImageCountLimit = 20
+        
+        let uiKitViewModel = UIKitViewModelImpl(imageLoader: imageLoader)
+        uiKitViewController.viewModel = uiKitViewModel
+        
+        return UINavigationController(rootViewController: uiKitViewController)
+    }
+}
