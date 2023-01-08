@@ -11,11 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private lazy var uiKitViewModel: UIKitViewModel = {
-        let imageLoader = ImageLoadServiceImpl()
-        return UIKitViewModelImpl(imageLoader: imageLoader)
-    }()
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
